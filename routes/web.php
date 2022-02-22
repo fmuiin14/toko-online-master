@@ -20,6 +20,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/products', [HomeController::class, 'products'])->name('products');
 
 // untuk halaman seller
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

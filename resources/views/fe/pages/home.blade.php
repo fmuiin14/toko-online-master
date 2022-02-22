@@ -80,6 +80,10 @@
 </section>
 <!-- Product Section End -->
 
+<div class="col-lg-12 text-center">
+    <a href="{{ route('products') }}" class="primary-btn btn">Load more products</a>
+</div>
+
 
 
 <!-- Trend Section Begin -->

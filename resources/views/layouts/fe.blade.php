@@ -67,8 +67,8 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./blog.html">Categories</a></li>
+                            <li class="{{ (request()->is('/')) ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
+                            <li class="{{ (request()->is('products')) ? 'active' : '' }}"><a href="{{ route('products') }}">Products</a></li>
                             <li><a href="./shop.html">Shop</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
@@ -83,10 +83,8 @@
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
                             <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
                             </a></li>
                             <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
                             </a></li>
                         </ul>
                     </div>

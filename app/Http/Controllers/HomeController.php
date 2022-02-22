@@ -20,4 +20,10 @@ class HomeController extends Controller
         
         return view('fe.pages.home', compact('products'));
     }
+
+    public function products(Request $request)
+    {
+        $products = Product::paginate(12);
+        return view('fe.pages.products', compact('products'));
+    }
 }
