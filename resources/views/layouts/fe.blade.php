@@ -23,6 +23,16 @@
     <link rel="stylesheet" href="{{ asset('fe') }}/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('fe') }}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('fe') }}/css/style.css" type="text/css">
+
+    <style>
+        .categories-custom {
+            color: red;
+            font-weight: bold;
+        }
+        .categories-custom h6 {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>

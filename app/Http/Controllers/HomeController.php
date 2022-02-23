@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,9 +17,9 @@ class HomeController extends Controller
             ->select('products.*', 'products.name as proname', 'products.id as proid', 'products.created_at as procreated', 'users.*', 'categories.id as cateid', 'categories.name as catename')
             ->take(8)
             ->orderByDesc('procreated')->get();
-            // dd($products);
+        $categories = Category::all();
         
-        return view('fe.pages.home', compact('products'));
+        return view('fe.pages.home', compact('products', 'categories'));
     }
 
     public function products(Request $request)

@@ -84,7 +84,29 @@
     <a href="{{ route('products') }}" class="primary-btn btn">Load more products</a>
 </div>
 
-
+<!-- Services Section Begin -->
+<section class="services spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h4>All Categories</h4>
+                </div>
+            </div>
+            @foreach ($categories as $item)
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="text-center categories-custom">
+                        <a href="">
+                        <img src="{{ Storage::url($item->photo) }}" class="img-fluid" style="width: 60px;" alt="">
+                        <h6>{{ $item->name }}</h6>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
 
 <!-- Trend Section Begin -->
 <section class="trend spad">
