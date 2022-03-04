@@ -18,6 +18,7 @@ class HomeController extends Controller
             ->take(8)
             ->orderByDesc('procreated')->get();
         $categories = Category::all();
+        // dd($products);
         
         return view('fe.pages.home', compact('products', 'categories'));
     }

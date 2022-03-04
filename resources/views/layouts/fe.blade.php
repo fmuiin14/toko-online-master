@@ -32,6 +32,10 @@
         .categories-custom h6 {
             font-weight: bold;
         }
+
+        .account {
+            float: right;
+        }
     </style>
 </head>
 
@@ -58,10 +62,12 @@
             <a href="#"><img src="{{ asset('fe') }}/img/logo.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
+        @guest
         <div class="offcanvas__auth">
             <a href="{{ route('login') }}">Login</a>
             <a href="{{ route('register') }}">Register</a>
         </div>
+        @endguest
     </div>
     <!-- Offcanvas Menu End -->
 
@@ -81,15 +87,30 @@
                             <li class="{{ (request()->is('products')) ? 'active' : '' }}"><a href="{{ route('products') }}">Products</a></li>
                             <li><a href="./shop.html">Shop</a></li>
                             <li><a href="./contact.html">Contact</a></li>
+                            @auth
+                            <li class="account"><a href="#">Hi, {{ Auth::user()->name }}</a>
+                                <ul class="dropdown">
+                                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                    <li><a href="#">Settings</a></li>
+                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li> 
+                            @endauth
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__right">
+                        @guest
                         <div class="header__right__auth">
                             <a href="{{ route('login') }}">Login</a>
                             <a href="{{ route('register') }}">Register</a>
                         </div>
+                        @endguest
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
                             <li><a href="#"><span class="icon_heart_alt"></span>
