@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\Admin\UserController;
@@ -26,10 +27,15 @@ Route::get('/products', [HomeController::class, 'products'])->name('products');
 Route::get('/details/{id}', [DetailController::class, 'index'])->name('detail');
 Route::post('/details/{id}', [DetailController::class, 'add'])->name('detail-add');
 
-// untuk halaman seller
+// untuk halaman seller ADMIN
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+// untuk yg udh login
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+});
 
 // untuk halaman admin
 Route::prefix('admin')
