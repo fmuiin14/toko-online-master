@@ -22,7 +22,7 @@
 <!-- Breadcrumb End -->
 
 <!-- Shop Cart Section Begin -->
-<section class="shop-cart spad">
+<section class="shop-cart">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -30,18 +30,20 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>Product</th>
+                                <th>Seller</th>
                                 <th>Price</th>
-                                <th>Total</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php $totalPrice = 0 @endphp
+                            @foreach ($carts as $cart)
                             <tr>
                                 <td class="cart__product__item">
-                                    <img src="img/shop-cart/cp-1.jpg" alt="">
+                                    <img src="{{ Storage::url($cart->cover) }}" alt="" style="width: 120px;">
                                     <div class="cart__product__item__title">
-                                        <h6>Chain bucket bag</h6>
                                         <div class="rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -51,24 +53,24 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="cart__price">$ 150.0</td>
-                                <td class="cart__total">$ 300.0</td>
-                                <td class="cart__close"><span class="icon_close"></span></td>
+                                <td class="cart__price">{{ $cart->name }}</td>
+                                <td class="cart__total">{{ $cart->store_name }}</td>
+                                <td class="cart__total">Rp {{ number_format($cart->price) }}</td>
+                                
+                                <td class="cart__close">
+                                    <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="btn btn-remove-cart" type="submit">
+                                            <span class="icon_close"></span>
+                                        </button>
+                                      </form>
+                                </td>
                             </tr>
+                            @php $totalPrice += $cart->price @endphp
+                            @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="cart__btn">
-                    <a href="#">Continue Shopping</a>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="cart__btn update__btn">
-                    <a href="#"><span class="icon_loading"></span> Update cart</a>
                 </div>
             </div>
         </div>
@@ -77,7 +79,7 @@
 <!-- Shop Cart Section End -->
 
     <!-- Checkout Section Begin -->
-    <section class="checkout spad">
+    <section class="checkout">
         <div class="container">
             <form action="#" class="checkout__form">
                 <div class="row">
@@ -103,8 +105,11 @@
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>City <span>*</span></p>
-                                    <input type="text" placeholder="Street Address">
-                                    <input type="text" placeholder="Apartment. suite, unite ect ( optinal )">
+                                    <input type="text">
+                                </div>
+                                <div class="checkout__form__input">
+                                    <p>City <span>*</span></p>
+                                    <input type="text">
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>Postal Code <span>*</span></p>
@@ -119,45 +124,6 @@
                                     <input type="text">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Phone <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Email <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="checkout__form__checkbox">
-                                    <label for="acc">
-                                        Create an acount?
-                                        <input type="checkbox" id="acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create am acount by entering the information below. If you are a returing
-                                        customer login at the <br />top of the page</p>
-                                    </div>
-                                    <div class="checkout__form__input">
-                                        <p>Account Password <span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                    <div class="checkout__form__checkbox">
-                                        <label for="note">
-                                            Note about your order, e.g, special noe for delivery
-                                            <input type="checkbox" id="note">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <div class="checkout__form__input">
-                                        <p>Oder notes <span>*</span></p>
-                                        <input type="text"
-                                        placeholder="Note about your order, e.g, special noe for delivery">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -181,25 +147,7 @@
                                         <li>Total <span>$ 750.0</span></li>
                                     </ul>
                                 </div>
-                                <div class="checkout__order__widget">
-                                    <label for="o-acc">
-                                        Create an acount?
-                                        <input type="checkbox" id="o-acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create am acount by entering the information below. If you are a returing customer
-                                    login at the top of the page.</p>
-                                    <label for="check-payment">
-                                        Cheque payment
-                                        <input type="checkbox" id="check-payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label for="paypal">
-                                        PayPal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
+                                
                                 <button type="submit" class="site-btn">Place oder</button>
                             </div>
                         </div>
