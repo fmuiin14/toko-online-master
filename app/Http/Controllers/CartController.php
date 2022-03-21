@@ -19,7 +19,7 @@ class CartController extends Controller
             ->get();
 
         // dd($carts);
-        
+
         return view('fe.pages.cart',[
             'carts' => $carts
         ]);
@@ -28,9 +28,15 @@ class CartController extends Controller
     public function delete(Request $request, $id)
     {
         $cart = Cart::findOrFail($id);
+        // dd($cart);
 
         $cart->delete();
 
         return redirect()->route('cart');
+    }
+
+    public function success()
+    {
+        return view('pages.success');
     }
 }

@@ -54,8 +54,13 @@
             <li><a href="#"><span class="icon_heart_alt"></span>
                 <div class="tip">2</div>
             </a></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
+            <li><a href="{{ route('cart') }}"><span class="icon_bag_alt"></span>
+                @php
+                    $carts = \App\Models\Cart::where('users_id', Auth::user()->id)->count();
+                @endphp
+                @if($carts > 0)
+                <div class="tip">{{ $carts }}</div>
+                @endif
             </a></li>
         </ul>
         <div class="offcanvas__logo">
@@ -98,7 +103,7 @@
                                         </form>
                                     </li>
                                 </ul>
-                            </li> 
+                            </li>
                             @endauth
                         </ul>
                     </nav>
@@ -115,7 +120,13 @@
                             <li><span class="icon_search search-switch"></span></li>
                             <li><a href="#"><span class="icon_heart_alt"></span>
                             </a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
+                            <li><a href="{{ route('cart') }}"><span class="icon_bag_alt"></span>
+                                @php
+                                $carts = \App\Models\Cart::where('users_id', Auth::user()->id)->count();
+                            @endphp
+                            @if($carts > 0)
+                            <div class="tip">{{ $carts }}</div>
+                            @endif
                             </a></li>
                         </ul>
                     </div>
